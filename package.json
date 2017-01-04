@@ -17,15 +17,15 @@
     "node": ">=4.0.0"
   },
   "devDependencies": {
+    "code": "4.0.0",
     "eslint": "2.9.0",
     "eslint-config-hapi": "9.1.0",
     "eslint-plugin-hapi": "4.0.0",
     "hapi": "15.2.0",
-    "code": "4.0.0",
     "lab": "11.2.0"
   },
   "dependencies": {
-    "webpack": "2.1.0-beta.25",
+    "webpack": "2.2.0-rc.3",
     "webpack-dev-middleware": "1.8.4"
   }
 }
