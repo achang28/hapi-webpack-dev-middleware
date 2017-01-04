@@ -3,33 +3,29 @@
 const Webpack = require('webpack');
 const WebpackDevMiddleware = require('webpack-dev-middleware');
 
-
-exports.register = (server, options, next) => {
-
-    const config = options.config;
+exports.register = (server, { config, options }, next) => {
+  if (!config) {
+    return reply(err);
+  } else {
     const compiler = Webpack(config);
-    server.app.webpackCompiler = compiler;
-    const middleware = WebpackDevMiddleware(compiler, options.options);
+    const middleware = WebpackDevMiddleware(compiler, options);
+    // server.app['webpackCompiler'] = compiler;
 
     server.ext('onRequest', (request, reply) => {
+      middleware(req, res, (err) => {
+        if (err) {
+          return reply(err);
+        }
 
-        const req = request.raw.req;
-        const res = request.raw.res;
-
-        middleware(req, res, (err) => {
-
-            if (err) {
-                return reply(err);
-            }
-
-            return reply.continue();
-        });
+        return reply.continue();
+      });
     });
 
     next();
+  }
 };
 
 
 exports.register.attributes = {
-    pkg: require('./package.json')
+  pkg: require('./package.json');
 };
