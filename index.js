@@ -3,7 +3,7 @@
 const Webpack = require('webpack');
 const WebpackDevMiddleware = require('webpack-dev-middleware');
 
-exports.register = (server, { config, options }, next) => {
+exports.register = (server, { config }, next) => {
   if (!config) {
     return reply(err);
   } else {
@@ -27,5 +27,5 @@ exports.register = (server, { config, options }, next) => {
 
 
 exports.register.attributes = {
-  pkg: require('./package.json');
+  pkg: require('./package.json')
 };
